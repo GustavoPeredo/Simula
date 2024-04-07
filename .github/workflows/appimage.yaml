@@ -13,6 +13,7 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: DeterminateSystems/magic-nix-cache-action@v2
+    - run: git submodule update --init --recursive
     - run: nix-env -iA cachix -f https://cachix.org/api/v1/install
     - run: cachix use simula
     - run: nix-build -Q default.nix --arg onNixOS "false" --arg devBuild "false"
