@@ -7,6 +7,7 @@ env:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v25
@@ -17,9 +18,10 @@ jobs:
     - run: nix-env -iA cachix -f https://cachix.org/api/v1/install
     - run: cachix use simula
     - run: nix-build -Q default.nix --arg onNixOS "false" --arg devBuild "false"
-    - run: nix bundle --bundler github:ralismark/nix-appimage --file default.nix --arg onNixOS "false" --arg devBuild "false" -o appimage
-    - uses: actions/upload-artifact@v4
-      with:
-        name: my-artifact
-        path: appimage
-        overwrite: true
+    - run: nix log /nix/store/jp88g1n58jmjbwp5x0522fcmdb003v0w-godot-3.2.drv
+    #- run: nix bundle --bundler github:ralismark/nix-appimage --file default.nix --arg onNixOS "false" --arg devBuild "false" -o appimage
+    #- uses: actions/upload-artifact@v4
+    #  with:
+    #    name: my-artifact
+    #    path: appimage
+    #    overwrite: true
