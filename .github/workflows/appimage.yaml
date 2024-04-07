@@ -17,8 +17,7 @@ jobs:
     - run: git submodule update --init --recursive --depth 1
     - run: nix-env -iA cachix -f https://cachix.org/api/v1/install
     - run: cachix use simula
-    - run: nix-build -Q default.nix --arg onNixOS "false" --arg devBuild "false"
-    - run: nix log /nix/store/jp88g1n58jmjbwp5x0522fcmdb003v0w-godot-3.2.drv
+    - run: nix-build -Q default.nix --arg onNixOS "false" --arg devBuild "false" || nix log /nix/store/jp88g1n58jmjbwp5x0522fcmdb003v0w-godot-3.2.drv
     #- run: nix bundle --bundler github:ralismark/nix-appimage --file default.nix --arg onNixOS "false" --arg devBuild "false" -o appimage
     #- uses: actions/upload-artifact@v4
     #  with:
